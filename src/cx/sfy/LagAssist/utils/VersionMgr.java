@@ -43,7 +43,7 @@ public class VersionMgr {
 	}
 
 	public static boolean isV1_11() {
-		return !isV1_8() && !isV1_9() && !isV1_10();
+		return Bukkit.getVersion().contains("1.11");
 	}
 	
 	public static boolean isV1_12() {
@@ -56,6 +56,14 @@ public class VersionMgr {
 
 	public static boolean isV1_14() {
 		return Bukkit.getVersion().contains("1.14");
+	}
+	
+	public static boolean isV1_17() {
+		return Bukkit.getVersion().contains("1.17");
+	}
+	
+	public static boolean isV_17Plus() {
+		return isV1_17();
 	}
 	
 	public static boolean isNewMaterials() {

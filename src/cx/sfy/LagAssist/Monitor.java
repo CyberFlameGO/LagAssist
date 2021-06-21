@@ -1,7 +1,5 @@
 package cx.sfy.LagAssist;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.text.DecimalFormat;
 import java.util.Arrays;
 
@@ -13,15 +11,12 @@ import org.bukkit.scheduler.BukkitTask;
 import cx.sfy.LagAssist.hoppers.ChunkHoppers;
 import cx.sfy.LagAssist.mobs.SmartMob;
 import cx.sfy.LagAssist.mobs.SpawnerMgr;
+import cx.sfy.LagAssist.packets.Reflection;
 
 public class Monitor {
 
-	private final static String name = Bukkit.getServer().getClass().getPackage().getName();
-	private final static String version = name.substring(name.lastIndexOf('.') + 1);
 	private static DecimalFormat format = new DecimalFormat("##.##");
 
-	private static Object serverInstance;
-	private static Field tpsField;
 
 	public static Runtime Rtm = Runtime.getRuntime();
 
@@ -47,15 +42,6 @@ public class Monitor {
 			GetExactTPS();
 			createGraph();
 		}
-
-		try {
-			serverInstance = getNMSClass("MinecraftServer").getMethod("getServer").invoke(null);
-			tpsField = serverInstance.getClass().getField("recentTps");
-		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException
-				| SecurityException | NoSuchFieldException e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	private static void LagMeasures(double d) {
@@ -195,12 +181,7 @@ public class Monitor {
 	}
 
 	public static String getTPS(int time) {
-		try {
-			double[] tps = ((double[]) tpsField.get(serverInstance));
-			return format.format(tps[time]).replace(',', '.');
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		}
+		return format.format(Reflection.getTPS(time)).replace(",", ".");
 	}
 
 	public static void createGraph() {
@@ -245,11 +226,4 @@ public class Monitor {
 		}, 7L, 7L);
 	}
 
-	private static Class<?> getNMSClass(String className) {
-		try {
-			return Class.forName("net.minecraft.server." + version + "." + className);
-		} catch (ClassNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-	}
 }

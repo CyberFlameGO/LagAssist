@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 
 import cx.sfy.LagAssist.client.ClientMain;
 import cx.sfy.LagAssist.safety.SafetyManager;
+import cx.sfy.LagAssist.utils.VersionMgr;
 import io.netty.channel.Channel;
 
 public class PacketInjector {
@@ -21,10 +22,10 @@ public class PacketInjector {
 			return;
 		}
 		try {
-			PacketInjector.playerConnection = Reflection.getClass("{nms}.EntityPlayer").getField("playerConnection");
-			PacketInjector.networkManager = Reflection.getClass("{nms}.PlayerConnection").getField("networkManager");
+			PacketInjector.playerConnection = Reflection.getClass(VersionMgr.isV_17Plus() ? "{nms}.level.EntityPlayer" : "{nms}.EntityPlayer").getField(VersionMgr.isV_17Plus() ? "b" : "playerConnection");
+			PacketInjector.networkManager = Reflection.getClass(VersionMgr.isV_17Plus() ? "{nms}.network.PlayerConnection" : "{nms}.PlayerConnection").getField(VersionMgr.isV_17Plus() ? "a" : "networkManager");
 
-			PacketInjector.channel = Reflection.getClass("{nms}.NetworkManager").getField("channel");
+			PacketInjector.channel = Reflection.getClass(VersionMgr.isV1_17() ? "{nm}.network.NetworkManager" : "{nms}.NetworkManager").getField(VersionMgr.isV1_17() ? "k" : "channel");
 
 			PacketInjector.refreshSessions();
 		} catch (Exception e) {

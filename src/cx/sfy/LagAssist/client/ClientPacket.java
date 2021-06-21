@@ -37,7 +37,7 @@ public class ClientPacket {
 					int z = ((int) Reflection.getFieldValue(msg, "d")) / 32;
 					Location loc = new Location(p.getWorld(), x, y, z);
 					ent = Reflection.getEntity(loc);
-				} else if (VersionMgr.isV1_13() || VersionMgr.isV1_14()) {
+				} else if (VersionMgr.isNewMaterials()) {
 					UUID u = (UUID) Reflection.getFieldValue(msg, "b");
 					ent = Bukkit.getEntity(u);
 				} else {

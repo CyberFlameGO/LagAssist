@@ -40,7 +40,7 @@ public class Reflection {
 	public static enum Classes {
 
 		CraftWorld(), CraftBlock(), CraftPlayer(), Material(), MapMeta(), WorldServer(), ChunkProviderServer(),
-		PacketPlayOutTitle(), IChatBaseComponent(), World();
+		PacketPlayOutTitle(), IChatBaseComponent(), World(), MinecraftServer();
 
 		private Class<?> type;
 
@@ -52,7 +52,7 @@ public class Reflection {
 	public static enum Methods {
 
 		setMapId(), getMapId(), getPlayerHandle(), getBlockType(), getChunkProviderServer(), chunkExists(),
-		getIChatBaseComponent(), setViewDistance();
+		getIChatBaseComponent(), setViewDistance(), getServer();
 
 		private Method mthd;
 
@@ -70,10 +70,11 @@ public class Reflection {
 		Classes.CraftPlayer.type = getClass("{cb}.entity.CraftPlayer");
 		Classes.Material.type = getClass("{b}.Material");
 		Classes.MapMeta.type = getClass("{b}.inventory.meta.MapMeta");
-		Classes.WorldServer.type = getClass("{nms}.WorldServer");
-		Classes.ChunkProviderServer.type = getClass("{nms}.ChunkProviderServer");
-		Classes.IChatBaseComponent.type = getClass("{nms}.IChatBaseComponent");
-		Classes.PacketPlayOutTitle.type = getClass("{nms}.PacketPlayOutTitle");
+		Classes.WorldServer.type = getClass(VersionMgr.isV_17Plus() ? "{nms}.level.WorldServer" : "{nms}.WorldServer");
+		Classes.MinecraftServer.type = getClass("{nms}.MinecraftServer");
+		Classes.ChunkProviderServer.type = getClass(VersionMgr.isV_17Plus() ? "{nms}.level.ChunkProviderServer" : "{nms}.ChunkProviderServer");
+		Classes.IChatBaseComponent.type = getClass(VersionMgr.isV_17Plus() ? "{nm}.network.chat.IChatBaseComponent" : "{nms}.IChatBaseComponent");
+//		Classes.PacketPlayOutTitle.type = getClass(VersionMgr.isV_17Plus()? "{nm}.network.protocol.game.PacketPlayOutTitle" : "{nms}.PacketPlayOutTitle");
 
 		// PUTTING METHODS IN ENUM.
 		Methods.setMapId.mthd = getMethod(Classes.MapMeta.getType(), "setMapId", int.class);
@@ -85,6 +86,7 @@ public class Reflection {
 		Methods.chunkExists.mthd = getMethod(Classes.ChunkProviderServer.getType(), VersionMgr.ChunkExistsName(),
 				int.class, int.class);
 		Methods.setViewDistance.mthd = getMethod(Classes.World.getType(), "setViewDistance", int.class);
+		Methods.getServer.mthd = getMethod(Classes.MinecraftServer.getType(), "getServer");
 	}
 
 	@SuppressWarnings("deprecation")
@@ -96,33 +98,33 @@ public class Reflection {
 		}
 	}
 
-	public void sendTitle(Player p, int fadein, int stay, int fadeout, String title, String subtitle) {
-		try {
-			Object enumTitle = Classes.PacketPlayOutTitle.getType().getDeclaredClasses()[0].getField("TITLE").get(null);
-			Object enumSubtitle = Classes.PacketPlayOutTitle.getType().getDeclaredClasses()[0].getField("SUBTITLE")
-					.get(null);
-
-			Object titlebase = runMethod(null, Methods.getIChatBaseComponent.getMethod(),
-					"{\"text\": \"" + title + "\"}");
-			Object subtitlebase = runMethod(null, Methods.getIChatBaseComponent.getMethod(),
-					"{\"text\": \"" + subtitle + "\"}");
-
-			Class<?> packetcls = Classes.PacketPlayOutTitle.getType();
-			Constructor<?> constr = packetcls.getConstructor(
-					Classes.PacketPlayOutTitle.getType().getDeclaredClasses()[0], Classes.IChatBaseComponent.getType(),
-					int.class, int.class, int.class);
-
-			Object packetTitle = constr.newInstance(enumTitle, titlebase, fadein, stay, fadeout);
-			Object packetSubtitle = constr.newInstance(enumSubtitle, subtitlebase, fadein, stay, fadeout);
-
-			sendPlayerPacket(p, packetTitle);
-			sendPlayerPacket(p, packetSubtitle);
-		}
-
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public void sendTitle(Player p, int fadein, int stay, int fadeout, String title, String subtitle) {
+//		try {
+//			Object enumTitle = Classes.PacketPlayOutTitle.getType().getDeclaredClasses()[0].getField("TITLE").get(null);
+//			Object enumSubtitle = Classes.PacketPlayOutTitle.getType().getDeclaredClasses()[0].getField("SUBTITLE")
+//					.get(null);
+//
+//			Object titlebase = runMethod(null, Methods.getIChatBaseComponent.getMethod(),
+//					"{\"text\": \"" + title + "\"}");
+//			Object subtitlebase = runMethod(null, Methods.getIChatBaseComponent.getMethod(),
+//					"{\"text\": \"" + subtitle + "\"}");
+//
+//			Class<?> packetcls = Classes.PacketPlayOutTitle.getType();
+//			Constructor<?> constr = packetcls.getConstructor(
+//					Classes.PacketPlayOutTitle.getType().getDeclaredClasses()[0], Classes.IChatBaseComponent.getType(),
+//					int.class, int.class, int.class);
+//
+//			Object packetTitle = constr.newInstance(enumTitle, titlebase, fadein, stay, fadeout);
+//			Object packetSubtitle = constr.newInstance(enumSubtitle, subtitlebase, fadein, stay, fadeout);
+//
+//			sendPlayerPacket(p, packetTitle);
+//			sendPlayerPacket(p, packetSubtitle);
+//		}
+//
+//		catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	public static MapView getMapView(int i) {
 		Class<?> buk = Bukkit.class;
@@ -135,6 +137,23 @@ public class Reflection {
 			return null;
 		}
 
+	}
+	
+	private static Object minecraftserver = null;
+	public static double getTPS(int number) {
+		try {
+		if (minecraftserver == null) {
+			minecraftserver = Methods.getServer.mthd.invoke(null);
+		}
+		
+		Field f = Reflection.getField(Classes.MinecraftServer.type, "recentTps");
+		f.setAccessible(true);
+		
+		return ((double[])f.get(minecraftserver))[number];
+		} catch(Exception e) {
+			e.printStackTrace();
+			return -1;
+		}
 	}
 
 	public static int getId(MapView view) {
@@ -167,8 +186,9 @@ public class Reflection {
 
 	public static Class<?> getClass(String classname) {
 		try {
-			String path = classname.replace("{nms}", "net.minecraft.server." + version)
-					.replace("{nm}", "net.minecraft." + version).replace("{cb}", "org.bukkit.craftbukkit." + version)
+			
+			String path = classname.replace("{nms}", "net.minecraft.server" + (VersionMgr.isV_17Plus() ? "" : "." + version))
+					.replace("{nm}", "net.minecraft" + (VersionMgr.isV_17Plus() ? "" : "." + version)).replace("{cb}", "org.bukkit.craftbukkit." + version)
 					.replace("{b}", "org.bukkit");
 			return Class.forName(path);
 		} catch (Exception e) {
