@@ -78,7 +78,7 @@ smart-stacker:
     tag-visibility: true
     # Size is required if you want stacking to work.
     tag-format: "&f{type} &cx{size}"
-    # What entity types don't you want to be stackable.
+    # What entity types you want to be stackable.
     stackable:
 #    - "SKELETON"
 #    - "ZOMBIE"
@@ -484,6 +484,8 @@ limiter:
   # The amount of time between chunk cleans. Setting it to a small amount can make your server have more lag, while a larger amount may mean slower
   # responses
   timer-time: 1200
+  # Should the limiter ignore named mobs?
+  ignore-named-mobs: false
   mobs:
     # The maximum limit of mobs that can spawn per chunk. Set this to a larger number, and use
     # the per-limit system to set limits for certain types of mobs.
@@ -762,4 +764,4 @@ hooks:
     # What message should show up to players that get paid. %amount% for paid amount.
     message: "&c&lLag&f&lAssist &e» &fYou were paid %amount% in the paywave."
 # This allows the system to update the config if the plugin is updated.
-version: 29
+version: 30

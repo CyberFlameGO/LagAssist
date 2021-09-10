@@ -107,10 +107,13 @@ public class SmartMob implements Listener {
 
 	@EventHandler(priority = EventPriority.LOWEST)
 	public void SpawnListener(CreatureSpawnEvent e) {
+		
+		if (!WorldMgr.blacklist.contains(e.getEntity().getWorld().getName())) {
+			return;
+		}
+		
 		if (!Spawning) {
-			if (!WorldMgr.blacklist.contains(e.getEntity().getWorld().getName())) {
-				e.setCancelled(true);
-			}
+			e.setCancelled(true);
 			return;
 		}
 		Entity ent = e.getEntity();

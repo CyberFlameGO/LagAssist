@@ -12,6 +12,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import cx.sfy.LagAssist.Data;
 import cx.sfy.LagAssist.Main;
 import cx.sfy.LagAssist.MonTools;
 import cx.sfy.LagAssist.MsrExec;
@@ -99,6 +100,8 @@ public class CommandListener implements CommandExecutor {
 				} else if (arg.equalsIgnoreCase("debugmode")) {
 					Main.debug = Main.debug >= 3 ? 0 : Main.debug+1;
 					sender.sendMessage(Main.PREFIX + "Debug setting currently at: " + Main.debug);
+				} else if (arg.equalsIgnoreCase("advertising")) {
+					Data.toggleAdvertising(sender);
 				} else {
 					sendHelp(sender);
 				}

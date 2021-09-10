@@ -27,6 +27,13 @@ public class Chat {
 		return msg;
 	}
 	
+	public static TextComponent genHoverAndLinkComponent(String show, String url, String hover) {
+		TextComponent msg = new TextComponent(show);
+		msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(hover).create()));
+		msg.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, url));
+		return msg;
+	}
+	
 	public static String capitalize(String stg) {
 		return stg.substring(0, 1).toUpperCase() + stg.substring(1);
 	}

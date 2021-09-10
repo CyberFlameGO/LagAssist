@@ -13,6 +13,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Hopper;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -197,5 +198,16 @@ public class Data {
 		data.set(cloc, allowed);
 		saveData();
 
+	}
+	
+	public static void toggleAdvertising(CommandSender sender) {
+		boolean advertising = !data.getBoolean("disable-advertising", false);
+		data.set("disable-advertising", advertising);
+		sender.sendMessage(Main.PREFIX + "Advertising disabled: " + advertising);
+		saveData();
+	}
+
+	public static boolean isAdvertising() {
+		return !data.getBoolean("disable-advertising");
 	}
 }

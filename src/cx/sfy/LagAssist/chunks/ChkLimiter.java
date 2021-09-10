@@ -161,6 +161,10 @@ public class ChkLimiter implements Listener {
 	// VERIFIERS (CODE QUALITY IMPROVERS)
 	private static boolean isDeniedMob(Entity ent) {
 
+		if (Main.config.getBoolean("limiter.ignore-named-mobs") && ent.getCustomName() != null) {
+			return false;
+		}
+		
 		EntityType etype = ent.getType();
 
 		// Fix issues with destroying player objects.
