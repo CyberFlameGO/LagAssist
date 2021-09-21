@@ -78,6 +78,11 @@ smart-stacker:
     tag-visibility: true
     # Size is required if you want stacking to work.
     tag-format: "&f{type} &cx{size}"
+    # What spawn reasons should be allowed for mob stacking. 
+    # Use ALL to allow all mobs to stack, or alternatively use any value from here:
+    # VALUES: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/event/entity/CreatureSpawnEvent.SpawnReason.html
+    spawn-reasons:
+    - "ALL"
     # What entity types you want to be stackable.
     stackable:
 #    - "SKELETON"
@@ -105,6 +110,15 @@ smart-stacker:
     # What's the highest amount a stack can get to? Since there's a limit of 1 stack per
     # split, it's useful to keep this higher.
     max-stack: 500
+    # The min-stack feature allows you how many mobs should be in a split before attempting to stack them.
+    # This can help retain some vanilla behaviour, but will have a negative effect on performance. Due to
+    # popular demand, it was added as the overall stacker should STILL be better performance wise than the
+    # alternatives, but don't set a min stack size if performance is your key concern.
+    #
+    # (!) To still have a good performance impact, LagAssist uses caching, which may result in the actually
+    #     mob counts that are checked to stack to slightly differ. This should not be very noticeable.
+    #
+    min-stack: 0
     # This section deals with custom handling for damage for stacked mobs.
     damage:
       # What damage causes should be multiplied by the stack count.
@@ -764,4 +778,4 @@ hooks:
     # What message should show up to players that get paid. %amount% for paid amount.
     message: "&c&lLag&f&lAssist &e» &fYou were paid %amount% in the paywave."
 # This allows the system to update the config if the plugin is updated.
-version: 30
+version: 31

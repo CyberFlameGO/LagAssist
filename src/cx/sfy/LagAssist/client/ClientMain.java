@@ -15,6 +15,7 @@ import cx.sfy.LagAssist.cmd.ClientCmdListener;
 import cx.sfy.LagAssist.gui.DataGUI;
 import cx.sfy.LagAssist.packets.Reflection;
 import cx.sfy.LagAssist.utils.Others;
+import cx.sfy.LagAssist.utils.VersionMgr;
 import net.md_5.bungee.api.ChatColor;
 
 public class ClientMain implements Listener {
@@ -79,7 +80,8 @@ public class ClientMain implements Listener {
 		Reflection.getCommandMap().register(Main.p.getDescription().getName(), cmd);
 		Main.p.getCommand(ClientMain.command).setExecutor(new ClientCmdListener());
 
-		Bukkit.getLogger().info("    §e[§a✔§e] §fClient Optimizer.");
+		Bukkit.getLogger().info("    §e[§a✔§e] §fClient Optimizer. " + (VersionMgr.isV_17Plus() ? " EXPERIMENTAL SUPPORT 1.17+" : ""));
+		
 
 	}
 

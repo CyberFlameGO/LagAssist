@@ -56,7 +56,7 @@ public class Main extends JavaPlugin implements Listener {
 		p = this;
 
 		file = new File(getDataFolder(), "server.yml");
-		config = Others.getConfig(file, 29);
+		config = Others.getConfig(file, 31);
 
 		paper = VersionMgr.isPaper();
 
@@ -106,7 +106,7 @@ public class Main extends JavaPlugin implements Listener {
 	}
 
 	public static void ReloadPlugin(CommandSender s) {
-		config = Others.getConfig(file, 29);
+		config = Others.getConfig(file, 31);
 
 		Bukkit.getLogger().info(Main.PREFIX + "Reloading Systems:");
 		EnableClasses(true);

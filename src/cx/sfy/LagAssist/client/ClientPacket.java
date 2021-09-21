@@ -1,8 +1,8 @@
 package cx.sfy.LagAssist.client;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -26,39 +26,42 @@ public class ClientPacket {
 		}
 		try {
 			String name = msg.getClass().getSimpleName().toLowerCase();
+			String entitytype = null;
 			if (name.equals("packetplayoutspawnentity")
 					&& (ClientGUI.isOn(ToggleState.TNT, p) || ClientGUI.isOn(ToggleState.SAND, p))) {
 
-				Entity ent;
 
 				if (VersionMgr.isV1_8()) {
 					int x = ((int) Reflection.getFieldValue(msg, "b")) / 32;
 					int y = ((int) Reflection.getFieldValue(msg, "c")) / 32;
 					int z = ((int) Reflection.getFieldValue(msg, "d")) / 32;
 					Location loc = new Location(p.getWorld(), x, y, z);
-					ent = Reflection.getEntity(loc);
+					entitytype = Reflection.getEntity(loc).getType().toString();
 				} else if (VersionMgr.isV1_17()) {
-					UUID u = (UUID) Reflection.getFieldValue(msg, "d");
-					ent = Bukkit.getEntity(u);
-				} if (VersionMgr.isNewMaterials()) {
+					Object entitytypes = Reflection.getFieldValue(msg, "m");
+					entitytypes = Reflection.getFieldValue(entitytypes, "bv");
+					
+					entitytype = entitytypes == null ? "unknown" : entitytypes.toString();
+				} else if (VersionMgr.isNewMaterials()) {
+					// TODO: SYNC METHOD FIX MAY CAUSE MAJOR LAG!
 					UUID u = (UUID) Reflection.getFieldValue(msg, "b");
-					ent = Bukkit.getEntity(u);
+					entitytype = getEntityAsync(p, u).getType().toString().toUpperCase();
 				} else {
 					double x = ((double) Reflection.getFieldValue(msg, "c"));
 					double y = ((double) Reflection.getFieldValue(msg, "d"));
 					double z = ((double) Reflection.getFieldValue(msg, "e"));
 					Location loc = new Location(p.getWorld(), x, y, z);
-					ent = Reflection.getEntity(loc);
+					entitytype = Reflection.getEntity(loc).getType().toString();
 				}
 
-				if (ent == null) {
+				if (entitytype == null) {
 					return false;
 				}
+				
 
-				String type = ent.getType().toString();
-				if (type == "PRIMED_TNT") {
+				if (entitytype.contains("tnt")) {
 					return ClientGUI.isOn(ToggleState.TNT, p);
-				} else if (type == "FALLING_BLOCK") {
+				} else if (entitytype.contains("falling_block")) {
 					return ClientGUI.isOn(ToggleState.SAND, p);
 				}
 			} else if (name.equals("packetplayoutworldparticles")) {
@@ -83,6 +86,13 @@ public class ClientPacket {
 		}
 		return false;
 
+	}
+	
+	private static Entity getEntityAsync(Player p, UUID u) {
+		for (Entity ent : new ArrayList<>(p.getWorld().getEntities())) {
+			if (ent.getUniqueId() == u) return ent;
+		}
+		return null;
 	}
 
 }

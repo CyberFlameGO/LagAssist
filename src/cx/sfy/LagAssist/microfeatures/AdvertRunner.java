@@ -10,7 +10,6 @@ import org.bukkit.plugin.messaging.PluginMessageListener;
 import cx.sfy.LagAssist.Data;
 import cx.sfy.LagAssist.Main;
 import cx.sfy.LagAssist.utils.Chat;
-import net.minecraft.server.v1_12_R1.AdvancementProgress.a;
 
 public class AdvertRunner implements Listener, PluginMessageListener {
 

@@ -13,6 +13,7 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.event.inventory.PrepareAnvilEvent;
@@ -20,6 +21,7 @@ import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.metadata.FixedMetadataValue;
 
 import cx.sfy.LagAssist.Main;
 import cx.sfy.LagAssist.stacker.StackMonitor.SplitChangeEvent;
@@ -61,6 +63,23 @@ public class StackManager implements Listener {
 		StackChunk.runShutdown();
 	}
 
+	@EventHandler(priority = EventPriority.LOW)
+	public void onCreatureSpawn(CreatureSpawnEvent e) {
+		if (e.isCancelled()) {
+			return;
+		}
+
+		if (!smartstacker) {
+			return;
+		}
+		
+		if (WorldMgr.isBlacklisted(e.getLocation().getWorld())) {
+			return;
+		}
+		
+		e.getEntity().setMetadata("lagassist.spawnreason", new FixedMetadataValue(Main.p, e.getSpawnReason()));
+	}
+	
 	
 	@EventHandler(priority = EventPriority.HIGH)
 	public void onSpawn(EntitySpawnEvent e) {
@@ -81,11 +100,11 @@ public class StackManager implements Listener {
 			return;
 		}
 		
+		Entity ent = e.getEntity();
+		
 		if (!Main.config.getBoolean("smart-stacker.checks.spawn-check")) {
 			return;
 		}
-		
-		Entity ent = e.getEntity();
 		
 //		if (!(ent instanceof LivingEntity)) {
 //			return;
@@ -242,7 +261,7 @@ public class StackManager implements Listener {
 
 		StackChunk.unloadChunk(chk);
 	}
-
+	
 	public static boolean isStackable(Entity ent) {
 		if (ent == null) {
 			return false;
@@ -256,11 +275,19 @@ public class StackManager implements Listener {
 			return false;
 		}
 		
-		if (StackChunk.getStack(ent) < 0) {
+		if (!Main.config.getStringList("smart-stacker.gameplay.stackable").contains(ent.getType().toString().toUpperCase())) {
 			return false;
 		}
 		
-		if (!Main.config.getStringList("smart-stacker.gameplay.stackable").contains(ent.getType().toString().toUpperCase())) {
+		String spawnreason = ent.hasMetadata("lagassist.spawnreason") ? ent.getMetadata("lagassist.spawnreason").get(0).value().toString().toUpperCase() : "UNKNOWN";
+		
+		if(!(Main.config.getStringList("smart-stacker.gameplay.spawn-reasons").contains("ALL") || Main.config.getStringList("smart-stacker.gameplay.spawn-reasons").contains(spawnreason))) {
+			return false;
+		}
+		
+		int stacksize = StackChunk.getStack(ent);
+		
+		if (stacksize < 0) {
 			return false;
 		}
 
