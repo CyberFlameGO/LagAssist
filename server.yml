@@ -347,7 +347,7 @@ redstone-culler:
   #      we have 100 redstone, you will still have an effect on them.
   #
   # (!) TO disable set chance to 0.
-  chance: 3
+  chance: 0
   #
   # What blocks do you want to be affected by the redstone culler. This allows you
   # to prevent pressure plates or other valuable blocks that don't necessarily cause
@@ -363,7 +363,7 @@ redstone-culler:
   - "REDSTONE_TORCH"
   - "DIODE"
   #
-  # How many ticks should the redstone be culled if the signal changes. A too small value
+  # After how many ticks should the redstone be checked if the signal changes? A too small value
   # will not stop clocks, and a too large value will make destructive checks less effective.
   #
   # TIP: The recommmended value for destructive checks is 10-30; and 50-70 without.
@@ -385,7 +385,7 @@ redstone-culler:
   # Automatic Redstone culling will occur if TPS is under this value.
   # EG: If TPS is under 19, LagAssist will cull redstone each time the monitor runs.
   # TIP: Set to 0.0 to disable it.
-  maxtps: 19.0
+  maxtps: 0.0
 
 
 # Disable hopper crafting. Hoppers are one of the issues non-minigame server owners have to face. Enabling this
@@ -428,9 +428,9 @@ hopper-check:
     #           improve performance (if they are properly advertised on the server)
     define: "&eChunk &fHopper"
     # The filter system allows you to give players the ability to filter what items the chunk hoppers will pick. It is really useful
-    # for creating simple & performance efficient filters, along with incentivizing people to use chunk hoppers.
+    # for creating simple & performance efficient filters, along with incentivising people to use chunk hoppers.
     filter:
-      # The default items that chunk hoppers should pick up. This is used in case a hopper doesn't have a custom filter.\
+      # The default items that chunk hoppers should pick up. This is used in case a hopper doesn't have a custom filter.
       # (!) In case you use the custom hopper filter, please make sure to set the slots larger than the amount of slots in default.
       default:
       - "IRON_ORE"
@@ -495,8 +495,8 @@ hopper-check:
 #
 # This allows you to limit mobs while also allowing them to move between chunks.
 limiter:
-  # The amount of time between chunk cleans. Setting it to a small amount can make your server have more lag, while a larger amount may mean slower
-  # responses
+  # The amount of time between chunk cleans. Setting it to a small amount can make your server have more lag,
+  # while a larger amount may mean a longer time between checks
   timer-time: 1200
   # Should the limiter ignore named mobs?
   ignore-named-mobs: false
@@ -549,10 +549,10 @@ spawner-check:
     # How spread out we should spawn the entities. We recommend keeping it lower.
     spawnrange: 3
     # The maximum distance a player can be in order for the spawner to be active.
-    player-range: 10
+    player-range: 12
   # Automatic Spawner-Check activator. This will have no effect if the check is
   # disabled.
-  # EG: If TPS is under 19, LagAssist will start modifying how the spawners work.
+  # EG: If TPS is under 16, LagAssist will start modifying how the spawners work.
   # TIP: Set to 0.0 to disable it.
   maxtps: 16.0
 
@@ -567,7 +567,7 @@ deny-physics:
   # For example, you can disable decay, fire & melting for a build server.
   enabled: false
   # Automatic Physics disabler will occur if TPS is under this value.
-  # EG: If TPS is under 16, LagAssist will disable the physics that are
+  # EG: If TPS is under 17, LagAssist will disable Physics
   # TIP: Set to 0.0 to disable it.
   maxtps: 17.0
   # What should we disable? Please make sure this fits your game perfectly. If you have a cannoning server,
@@ -609,7 +609,6 @@ blacklisted-worlds:
   list:
   - blacklisted1name
   - blacklisted2name
-
   
 safety-manager:
 # The safety manager tries to lower the chances of a server crash when the server
@@ -693,7 +692,7 @@ logcleaner:
 #
 # (!) Both of these settings are independent. If any of these conditions are met, the
 # (!) file will get removed.
-  enabled: true
+  enabled: false
   list:
   - "logs/"
   conditions:
@@ -715,7 +714,7 @@ stats-bar:
   message: "&c&l⬛ &fTPS: &a{TPS} &7&m|&r &fMEM: &a{MEM}GB &7&m|&r &fCHKS: &a{CHKS} &7&m|&r &fENT: &a{ENT} &c&l⬛"
   # The interval in which the TPS average is created. A lower value will be more acurrate but will fluctuate a lot.
   # We suggest setting it around 6-12 for it to be the most precise.
-  tps-interval: 10
+  tps-interval: 8
   # How often should we refresh the statsbar? A lower value will look nicer and is more accurate, but might take more
   # (yet a minuscule difference) processing power to show.
   show-delay: 5
@@ -779,5 +778,6 @@ hooks:
     cache-duration: 1200
     # What message should show up to players that get paid. %amount% for paid amount.
     message: "&c&lLag&f&lAssist &e» &fYou were paid %amount% in the paywave."
+    
 # This allows the system to update the config if the plugin is updated.
 version: 31
