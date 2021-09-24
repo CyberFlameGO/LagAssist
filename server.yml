@@ -5,30 +5,30 @@
 # | |___| (_| | (_| |/ ____ \\__ \__ \ \__ \ |_ 
 # |______\__,_|\__, /_/    \_\___/___/_|___/\__|
 #               __/ |                           
-#              |___/     By Stefatorus       
+#              |___/     By EntryRise       
 # 
-# This is the default configuration. I suggest using it as it is.
-# If you need help configuring it, please add me on discord.
-# DISCORD: Stefatorus#9382
-#
-# Mobs that will be removed by the smart cleaner.
+# This is the default configuration. We suggest using it as it is.
+# If you need help configuring it, please visit our dedicated Discord Server.
+# DISCORD: https://discord.gg/4aWWPcb
+
+# Smart cleaner removes mobs based on the below configuration...
 #
 # TIP: This will not remove named mobs, even if they are in the list.
 # This follows the vanilla rule - don't despawn named entities, which
-# players are allready acustom to.
+# players are already accustomed to.
 smart-cleaner:
   # Do you want the system to be in whitelist or blacklist mode?
   # TIP: Whitelist - All except these get deleted ; Blacklist is the opposite
   whitelist: false
-  # Automatic Physics disabler will occur if tps is under this value.
-  # EG: If tps is under 16, lagassist will disable the physics that are
+  # The plugin will begin to cull mobs if the TPS drops below the set value.
+  # EG: If TPS is under 16, LagAssist will begin to cull mobs that are named below.
   # TIP: Set to 0.0 to disable it.
   maxtps-cull: 16.0
-  # Automatically disable mob spawning if tps is under this value.
-  # EG: If tps is under 14, lagassist will disable mob spawning.
+  # Automatically disable mob spawning if TPS is under this value.
+  # EG: If TPS is under 14, LagAssist will disable mob spawning.
   maxtps-disablespawn: 14.0
-  # List of the mobs that will get removed by the smart-cleaner.
-  # Mob names: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+  # List of the mobs that will get removed (or kept) by the smart-cleaner - (depending on whitelist or blacklist)
+  # Mob names: htttps://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
   mobs:
   - "ZOMBIE"
   - "CREEPER"
@@ -64,10 +64,8 @@ smart-stacker:
   checks:
     # Run stack check when a mob spawns.
     spawn-check: true
-    # (!)  Way more efficient than spawn check, but only works on custom tailored paper forks. You can use both for
-    #      best performance.
-    #      DO NOT ENABLE IF YOUR CUSTOM TAILORED FORK DOESN'T SET A TIMEOUT BEFORE RETRYING TO SPAWN ANOTHER MOB.
-    pre-spawn-check: false
+    # (!)  Do NOT enable the BElOW setting under any circumstances (unless you have had explicit guidance from us)
+    pre-spawn-check: false # <-- DO NOT ENABLE
     # Should we try to stack mobs when they change splits?
     # Disabling it may improve performance, but it's not recommended since it disables
     # stacking when moving from one chunk to another.
@@ -76,7 +74,7 @@ smart-stacker:
     # Should players always see stacked mob tags?
     # (!) Setting to false will make it so you can only see mob stacking when hovering over a mob
     tag-visibility: true
-    # Size is required if you want stacking to work.
+    # (!) You must keep {size} or stacking will break
     tag-format: "&f{type} &cx{size}"
     # What spawn reasons should be allowed for mob stacking. 
     # Use ALL to allow all mobs to stack, or alternatively use any value from here:
@@ -84,6 +82,7 @@ smart-stacker:
     spawn-reasons:
     - "ALL"
     # What entity types you want to be stackable.
+    # Mob names: htttps://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
     stackable:
 #    - "SKELETON"
 #    - "ZOMBIE"
@@ -95,15 +94,15 @@ smart-stacker:
 #    - "EVOKER"
   technical:
     # The amount of vertical splits per chunk (Must divide 256). A lower amount makes the stacking area go down and thus
-    # improve compatibility with farms.
-    # (!) Setting it under 4 is not recommended. 8, 16 recommended.
+    # improves compatibility with farms.
+    # (!) Setting it under 4 is not recommended. We reccomend 8 or 16.
     splits: 8
     # Should we remove all stacked mobs when the plugin is disabled? (DISABLED FEATURE)
     # (!) Highly suggested to be left on true, since it can help a lot with TPS. It
     #     also prevents the algorithm having to search the old mobs when the chunk issue
     #     empty which is a huge bonus.
     # (!) If left on false, the system will do stacking on chunk enable.
-    # shutdown-clean: false
+    # shutdown-clean: false <-- DO NOT ENABLE
     # Should we amplify drops to get the approximate value of what those mobs would drop
     # if they were to be killed one by one?
     drops-fix: true
@@ -115,7 +114,7 @@ smart-stacker:
     # popular demand, it was added as the overall stacker should STILL be better performance wise than the
     # alternatives, but don't set a min stack size if performance is your key concern.
     #
-    # (!) To still have a good performance impact, LagAssist uses caching, which may result in the actually
+    # (!) To still have decent performance impact, LagAssist uses caching, which may result in the actually
     #     mob counts that are checked to stack to slightly differ. This should not be very noticeable.
     #
     min-stack: 0
@@ -141,20 +140,20 @@ smart-stacker:
       villager: false
       tameable: true
       horse: true
-      # Checks for the age of the mob approximatively
+      # Checks for the approximate age of the mob
       ageable: false
 
-      
-# This is a simple mob modifier. It changes how some mobs behave to improve the server
-# performance. 
+
+# This is a simple mob modifier. It changes how some mobs behave to improve the server performance.
 mob-manager:
   # Disable armorstand gravity. This might help with creative servers which have a lot of armorstands.
   no-armorstand-gravity: false
   # Disable slime splitting, approximating the drops and health of a vanilla confrontation. This is very
   # useful for larger than vanilla slimes.
-  # NOTE: This also helps for vanilla slimes, but shouldn't (in my opinion) be used unless there is lag from
-  # NOTE: slimes.
+  # NOTE: This also helps for vanilla slimes, but shouldn't (in my opinion) be used unless there is 
+  #       lag from slimes.
   simple-slime: false
+
 
 # Micro features represent simple yet effective ways to reduce lag. It generally includes simple to implement
 # features that would otherwise not need their own section.
@@ -176,7 +175,7 @@ microfeatures:
     blocks:
     - "LEVER"
     counter:
-      message: "&cStop interacting with this block so fast."
+      message: "&cStop interacting with this block so fast!"
       # How much to increment each interact?
       increment: 20
       # Max value before showing the message
@@ -195,32 +194,33 @@ microfeatures:
     - "CACTUS"
     - "SUGAR_CANE"
 
+
 # Laggy Chunk detection. You can fiddle around and find the best settings for your
 # server.
 #
 # TIP: Find what kind of tiles or entities lag your server and set them a proper lag score
-# here. The default values should be fine, but finding the best settings for yourself is allways
-# the best way.
+#      here. The default values should be fine, but finding the best settings for yourself is always
+#      the best way.
 chunkanalyse:
   # Teleport command that will be issued when you click the text.
   # PLACEHOLDERS: {x}, {y}, {z}, {chunkx}, {chunkz} {world}
   #
   # TIP: Set it to a command that you like. This can be used to automatically clear lag in chunks, unload it, etc.
   tp-cmd: "lagassist tpchunk {world} {chunkx} {chunkz}"
-  # Score at wich the server will consider the chunk laggy and make it appear in the list. You should fiddle around with it so it only shows
+  # Score at which the server will consider the chunk laggy and make it appear in the list. You should fiddle around with it so it only shows
   # the chunks that you want it to find.
   #
   # TIP: The amount of chunks /lagassist chunkanalyse will show.
-  # (It will always show the top (amount value) laggiest chunks.)
+  #      (It will always show the top (amount value) laggiest chunks.)
   ammount: 10
   # Entity & Material names for laggy values.
   #
-  # materials: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
-  # entities: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
-  # tile entities: https://minecraft.gamepedia.com/Block_entity
+  # Materials: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+  # Entities: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/entity/EntityType.html
+  # Tile Entities: https://minecraft.gamepedia.com/Block_entity
   #
-  # TIP: Only detects Tile entities & entities. Normal blocks aren't ticked. This means that it would lag if i were to check the normal blocks.
-  # At the same time, normal blocks don't lag the server.
+  # TIP: Only detects Tile entities & entities. Normal blocks aren't ticked. This means that it would lag if we were to check the normal blocks.
+  #      At the same time, normal blocks don't lag the server.
   values:
     # -------------
     # TILE ENTITIES
@@ -236,12 +236,12 @@ chunkanalyse:
     note_block: 4
     piston_extension: 5
     dispenser: 10
-    # Mob spawners really lag the server. I suggest setting a high score related to them.
+    # Mob spawners really lag the server. We suggest setting a high score for them.
     mob_spawner: 60
     # --------------
     # NORMAL ENTITIES
     # --------------
-    # Players themselves. They have a decent score due to them being a lag cause (they create farms, afk at them, etc)
+    # Players themselves. They have a decent score due to them being a source of lag (they create farms, afk at them, etc)
     player: 15
     # Normal mobs that are found in a chunk. Set the value to a moderate one. They don't lag the server so much.
     # Creeper score slightly higher due to the explosion that could lag the server a bit.
@@ -275,9 +275,9 @@ chunkanalyse:
     ender_crystal: 10
     wither: 55
     wither_skull: 20
-    # Tnt is a severe lag issue. I recommend setting primed tnt (activated tnt) to a higher score. Remember that a tnt by
+    # TNT is a severe lag issue. We recommend setting primed TNT (activated TNT) to a higher score. Remember that a TNT by
     # itself doesn't lag as much, but they are used in mass numbers in cannons, etc.
-    # Minecart-TNTS are evem bigger of an issue due to their moving mechanics.
+    # minecart_tnt are even bigger of an issue due to their moving mechanics.
     primed_tnt: 7
     minecart_tnt: 15
     # Highly active entities. Includes entities that do many checks, and are used for mechanics.
@@ -291,9 +291,9 @@ chunk-manager:
   # Should we enable the chunk-manager? It can highly help with memory issues if you have too many loaded chunks.
   # NOTE: You need to have the max view distance set in your server.properties file.
   #
-  # (!) This feature will only work on PaperSpigot servers.
+  # (!) This feature will only work on Paper servers.
   enabled: false
-  # How many chunks should all players load at the same time.
+  # What is the maximum amount of chunks you want all players to be able to load at once.
   # TIP: The view distance is calculated using this formula:
   #      SQRT(MAX-CHUNKS / PLAYERS / 4).
   # EG: If the max chunks are at 6500, and you have 100 players online
@@ -306,11 +306,12 @@ chunk-manager:
   #     at a smaller view distance.
   max-view: 12
     
+
 #LagMeasures Config
 lag-measures:
   # Lag measures automatically runs anti-lag actions if the server has
-  # under a set amount of TPS. To configure the tps values, look for
-  # the maxtps setting in all lagassist systems.
+  # under a set amount of TPS. To configure the TPS values, look for
+  # the max TPS setting in all LagAssist systems.
   #
   # Announce the lag cleaning in the console and chat.
   announce:
@@ -321,12 +322,14 @@ lag-measures:
     staffmsg: true
     message: "&c&lLag&f&lAssist &e» &fRemoving server lag..."
   # Set the time between the lag-cleaning cycles.
-  # I suggest keeping it on 6000 as the fact that it disables redstone
+  # We suggest keeping it on 6000 as the fact that it disables redstone
   # machines might annoy some players if it is done too often.
   #
-  # TIP: Time is measured in ticks. 1 second has a tick
+  # TIP: Time is measured in ticks. 1 second has 20 ticks. E.g for 60 seconds, set to 60 * 20 = 1200
   # (For 10 second interval, set to 200)
+  # Default: 6000 ticks - 3 minutes interval
   timer: 6000
+
 
 # RedstoneCuller Tweaks
 redstone-culler:
@@ -339,12 +342,14 @@ redstone-culler:
   # their farms & Lag Machines back up in a matter of seconds.
   #
   # TIP: The chance doesn't need to be too big in order for their farms to
-  # break. The system triggers for all of the active redstone trails and will
-  # break X percent of the track. Remember that even if you have chance 2, if
-  # we have 100 redstone, you will still have an effect on them.
+  #      break. The system triggers for all of the active redstone trails and will
+  #      break X percent of the track. Remember that even if you have chance 2, if
+  #      we have 100 redstone, you will still have an effect on them.
   #
   # (!) TO disable set chance to 0.
-  chance: 3
+  # We highly suggest you enable this. Try the value 3, but, note, this can cause 
+  # widespread issues so be careful.
+  chance: 0
   #
   # What blocks do you want to be affected by the redstone culler. This allows you
   # to prevent pressure plates or other valuable blocks that don't necessarily cause
@@ -360,7 +365,7 @@ redstone-culler:
   - "REDSTONE_TORCH"
   - "DIODE"
   #
-  # How many ticks should the redstone be culled if the signal changes. A too small value
+  # After how many ticks should the redstone be checked if the signal changes? A too small value
   # will not stop clocks, and a too large value will make destructive checks less effective.
   #
   # TIP: The recommmended value for destructive checks is 10-30; and 50-70 without.
@@ -376,14 +381,13 @@ redstone-culler:
   destructive:
     # Should we enable destructive checks?
     enabled: false
-    # How many updates should the observer do in order to remove it? I recommend the default value.
+    # How many updates should the observer do in order to remove it? We recommend the default value.
     value: 16
   #
-  # Automatic Redstone culling will occur if tps is under this value.
-  # EG: If tps is under 19, lagassist will cull redstone each time the monitor runs.
+  # Automatic Redstone culling will occur if TPS is under this value.
+  # EG: If TPS is under 19, LagAssist will cull redstone each time the monitor runs.
   # TIP: Set to 0.0 to disable it.
   maxtps: 19.0
-
 
 
 # Disable hopper crafting. Hoppers are one of the issues non-minigame server owners have to face. Enabling this
@@ -426,9 +430,9 @@ hopper-check:
     #           improve performance (if they are properly advertised on the server)
     define: "&eChunk &fHopper"
     # The filter system allows you to give players the ability to filter what items the chunk hoppers will pick. It is really useful
-    # for creating simple & performance efficient filters, along with incentivizing people to use chunk hoppers.
+    # for creating simple & performance efficient filters, along with incentivising people to use chunk hoppers.
     filter:
-      # The default items that chunk hoppers should pick up. This is used in case a hopper doesn't have a custom filter.\
+      # The default items that chunk hoppers should pick up. This is used in case a hopper doesn't have a custom filter.
       # (!) In case you use the custom hopper filter, please make sure to set the slots larger than the amount of slots in default.
       default:
       - "IRON_ORE"
@@ -448,11 +452,11 @@ hopper-check:
     mob-hopper:
       # (!) Note: Mob Hoppers currently only work on 1.13+ servers.
       #
-      # This check can be used to alleviate lag during extreme lag sessions, or used temporarily. While i suggest
+      # This check can be used to alleviate lag during extreme lag sessions, or used temporarily. While we suggest
       # keeping it on all the times, if your players don't mind having to have their grinder account for it, you can
       # make it only run when the server lags.
-      # (!) To disable mob hoppers from working, just set max-tps to 0.
-      #     I suggest 17 if you want it temporary, or 20 if you want it permanent.
+      # (!) To disable mob hoppers from working, just set maxtps to 0.
+      #     We suggest 17 if you want it temporary, or 20 if you want it permanent.
       maxtps: 0.0
       # The reasons that the mob hopper will work for. This allows you to exclude normal mob
       # spawns from being funneled to the chunk hopper.
@@ -485,8 +489,6 @@ hopper-check:
         BONE: 1
         
 
-
-
 # The limiter allows you to limit the amount of mobs & tiles there are on a single chunk.
 # This system can be used to deny abusing spawning mobs, minecarts, etc.
 #
@@ -495,8 +497,8 @@ hopper-check:
 #
 # This allows you to limit mobs while also allowing them to move between chunks.
 limiter:
-  # The amount of time between chunk cleans. Setting it to a small amount can make your server have more lag, while a larger amount may mean slower
-  # responses
+  # The amount of time between chunk cleans. Setting it to a small amount can make your server have more lag,
+  # while a larger amount may mean a longer time between checks
   timer-time: 1200
   # Should the limiter ignore named mobs?
   ignore-named-mobs: false
@@ -512,7 +514,6 @@ limiter:
     hard-limit:
       entity1: 100
       #armor_stand: 100
-      
   tiles:
     # The maximum limit of tile entities that can be placed per chunk. Note that there are
     # very many types of tile entities, and they don't produce so much lag. This has limited
@@ -547,13 +548,13 @@ spawner-check:
     amount:
       min: 1
       max: 2
-    # How spread out we should spawn the entities. I recommend keeping it lower.
+    # How spread out we should spawn the entities. We recommend keeping it lower.
     spawnrange: 3
     # The maximum distance a player can be in order for the spawner to be active.
-    player-range: 10
+    player-range: 12
   # Automatic Spawner-Check activator. This will have no effect if the check is
   # disabled.
-  # EG: If tps is under 19, lagassist will start modifying how the spawners work.
+  # EG: If TPS is under 16, LagAssist will start modifying how the spawners work.
   # TIP: Set to 0.0 to disable it.
   maxtps: 16.0
 
@@ -567,8 +568,8 @@ deny-physics:
   # TIP: It can be used to modify gameplay features.
   # For example, you can disable decay, fire & melting for a build server.
   enabled: false
-  # Automatic Physics disabler will occur if tps is under this value.
-  # EG: If tps is under 16, lagassist will disable the physics that are
+  # Automatic Physics disabler will occur if TPS is under this value.
+  # EG: If TPS is under 17, LagAssist will disable Physics
   # TIP: Set to 0.0 to disable it.
   maxtps: 17.0
   # What should we disable? Please make sure this fits your game perfectly. If you have a cannoning server,
@@ -587,7 +588,6 @@ deny-physics:
     noteblock: true
 
     
-
 benchmark:
 # Benchmarking can be used to approximate the max players your server will be able
 # to sustain.
@@ -611,7 +611,6 @@ blacklisted-worlds:
   list:
   - blacklisted1name
   - blacklisted2name
-
   
 safety-manager:
 # The safety manager tries to lower the chances of a server crash when the server
@@ -685,6 +684,7 @@ safety-manager:
         size: 10000
         illegals: []
 
+
 logcleaner:
 # The Log-Cleaner cleans old logs from the directories that you select. You can use this feature to get rid of old
 # logs.
@@ -694,7 +694,7 @@ logcleaner:
 #
 # (!) Both of these settings are independent. If any of these conditions are met, the
 # (!) file will get removed.
-  enabled: true
+  enabled: false
   list:
   - "logs/"
   conditions:
@@ -706,16 +706,17 @@ logcleaner:
 super-loader:
 # The super loader feature allows LagAssist and other plugins to implement so called "NMS Expansions".
 # NMS Expansions allow the modification of minecraft classes during runtime.
-  enabled: false
+  enabled: false # (!) - should not be enabled unless strictly necessary
+
 
 stats-bar:
 # The statsbar can be accessed using /lagassist statsbar. You can configure it to better show your server
 # performance, or to better resemble your server's design choices.
 # PLACEHOLDERS: {TPS} {CHKS} {MEM} {ENT}
   message: "&c&l⬛ &fTPS: &a{TPS} &7&m|&r &fMEM: &a{MEM}GB &7&m|&r &fCHKS: &a{CHKS} &7&m|&r &fENT: &a{ENT} &c&l⬛"
-  # The interval in which the tps average is created. A lower value will be more acurrate but will fluctuate a lot.
-  # I suggest setting it around 6-12 for it to be the most precise.
-  tps-interval: 10
+  # The interval in which the TPS average is created. A lower value will be more acurrate but will fluctuate a lot.
+  # We suggest setting it around 6-12 for it to be the most precise.
+  tps-interval: 8
   # How often should we refresh the statsbar? A lower value will look nicer and is more accurate, but might take more
   # (yet a minuscule difference) processing power to show.
   show-delay: 5
@@ -727,7 +728,7 @@ lag-map:
   fully-reserve: false
 
 
-# The lagassist API provides tools for other plugins to get information from your server using
+# The LagAssist API provides tools for other plugins to get information from your server using
 # unconventional methods such as server-icon serialization. This provides several improvements
 # over plugin messaging.
 #
@@ -741,6 +742,7 @@ api:
     allowed-ips:
     - "1.2.3.4"
     - "9.9.9.9.*"
+
 
 # This system allows you to configure the SmartUpdater Reminder. This
 # system was developed to better notify users of important changes to
@@ -769,7 +771,8 @@ smart-updater:
     # to prevent misuse.
     untested: true
 
-# Controls for plugins lagassist hooks into.
+
+# Controls for plugins LagAssist hooks into.
 hooks:
   # Vault is used for paying money to users.
   vault:
@@ -777,5 +780,6 @@ hooks:
     cache-duration: 1200
     # What message should show up to players that get paid. %amount% for paid amount.
     message: "&c&lLag&f&lAssist &e» &fYou were paid %amount% in the paywave."
+    
 # This allows the system to update the config if the plugin is updated.
 version: 31
