@@ -347,6 +347,8 @@ redstone-culler:
   #      we have 100 redstone, you will still have an effect on them.
   #
   # (!) TO disable set chance to 0.
+  # We highly suggest you enable this. Try the value 3, but, note, this can cause 
+  # widespread issues so be careful.
   chance: 0
   #
   # What blocks do you want to be affected by the redstone culler. This allows you
@@ -385,7 +387,7 @@ redstone-culler:
   # Automatic Redstone culling will occur if TPS is under this value.
   # EG: If TPS is under 19, LagAssist will cull redstone each time the monitor runs.
   # TIP: Set to 0.0 to disable it.
-  maxtps: 0.0
+  maxtps: 19.0
 
 
 # Disable hopper crafting. Hoppers are one of the issues non-minigame server owners have to face. Enabling this
