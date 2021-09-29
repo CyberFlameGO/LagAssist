@@ -347,8 +347,10 @@ redstone-culler:
   #      we have 100 redstone, you will still have an effect on them.
   #
   # (!) TO disable set chance to 0.
-  # We highly suggest you enable this. Try the value 3, but, note, this can cause 
-  # widespread issues so be careful.
+  #     It is highly recommended to set to 2-5 to prevent people from simply re-starting their
+  #     lag machines after they are culled. Most malicious users will and will not care that they
+  #     have to spend hours babysitting their lag machine.
+  #
   chance: 0
   #
   # What blocks do you want to be affected by the redstone culler. This allows you
@@ -598,9 +600,9 @@ benchmark:
 #
 # (!) The size for upload is in bytes. A MB = 1.000.000 bytes. Default is 50MB
   download:
-    link: "ftp://speedtest.tele2.net/50MB.zip"
+    link: "https://speed.cloudflare.com/__down?bytes=50000000"
   upload: 
-    link: "ftp://speedtest.tele2.net/upload/%RND%.bin"
+    link: "https://speed.cloudflare.com/__up"
     size: 50000000
 
 
@@ -782,4 +784,4 @@ hooks:
     message: "&c&lLag&f&lAssist &e» &fYou were paid %amount% in the paywave."
     
 # This allows the system to update the config if the plugin is updated.
-version: 31
+version: 32
