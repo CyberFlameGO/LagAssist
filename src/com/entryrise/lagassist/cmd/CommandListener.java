@@ -70,7 +70,7 @@ public class CommandListener implements CommandExecutor {
 				} else if (arg.equalsIgnoreCase("stopgen") && sender.hasPermission("lagassist.generatechunks")) {
 					ChunkGenerator.stopGen(sender);
 				} else if (arg.equalsIgnoreCase("tpchunk")) {
-					sender.sendMessage(Main.PREFIX + "Correct usage: §c/lagassist tpchunk [WORLD] [X] [Z]");
+					sender.sendMessage(Main.PREFIX + "Correct usage: §2/lagassist tpchunk [WORLD] [X] [Z]");
 				} else if (arg.equalsIgnoreCase("reload") && sender.hasPermission("lagassist.reload")) {
 					Main.ReloadPlugin(sender);
 				} else if (arg.equalsIgnoreCase("changelog")) {
@@ -80,7 +80,7 @@ public class CommandListener implements CommandExecutor {
 						UUID p = ((Player) sender).getUniqueId();
 						if (MonTools.actionmon.contains(p)) {
 							MonTools.actionmon.remove(p);
-							sender.sendMessage(Main.PREFIX + "StatsBar §cDisabled.");
+							sender.sendMessage(Main.PREFIX + "StatsBar §2Disabled.");
 							Reflection.sendAction(Bukkit.getPlayer(p), "");
 						} else {
 							MonTools.actionmon.add(p);
@@ -124,7 +124,7 @@ public class CommandListener implements CommandExecutor {
 							p.teleport(new Location(w, x, y, z));
 							p.sendMessage(Main.PREFIX + "You have been teleported to the desired chunk.");
 						} else {
-							sender.sendMessage(Main.PREFIX + "Correct usage: §c/lagassist tpchunk [WORLD] [X] [Z]");
+							sender.sendMessage(Main.PREFIX + "Correct usage: §2/lagassist tpchunk [WORLD] [X] [Z]");
 						}
 					} else {
 						sender.sendMessage(Main.PREFIX + "You cannot tp to laggy chunks from console.");
@@ -145,61 +145,61 @@ public class CommandListener implements CommandExecutor {
 		if (s instanceof Player) {
 			Player p = (Player) s;
 			p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-					"     §c✸ §fLagAssist MobCuller §c- §eClear the configured mobs",
-					"§fClears the mobs that you have set to remove\nin the configuration file.\n\n§c(!) It won't remove named mobs.",
+					"     §2✸ §fLagAssist MobCuller §2- §eClear the configured mobs",
+					"§fClears the mobs that you have set to remove\nin the configuration file.\n\n§2(!) It won't remove named mobs.",
 					"LagAssist MobCuller"));
 			p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-					"     §c✸ §fLagAssist RedstoneCuller §c- §eDisables Redstone",
+					"     §2✸ §fLagAssist RedstoneCuller §2- §eDisables Redstone",
 					"§fDisables all the redstone that has been triggered in 30 ticks.\n\nIt can be used to temporarily disable lag-machines\nor to even break them, if you configure it to do so.\nIt also breaks lag-machines that don't use redstone wire!",
 					"LagAssist RedstoneCuller"));
 			p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-					"     §c✸ §fLagAssist ToggleSpawning §c- §eToggles mob spawning",
+					"     §2✸ §fLagAssist ToggleSpawning §2- §eToggles mob spawning",
 					"§fDisables all mob-spawning once it is toggled on.\n\nIt can be used when many players are online,\nand your server is not keeping up to all the mobs.",
 					"LagAssist ToggleSpawning"));
 			p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-					"     §c✸ §fLagAssist TogglePhyisics §c- §eToggles physics events.",
+					"     §2✸ §fLagAssist TogglePhyisics §2- §eToggles physics events.",
 					"§fIt disables all physics events that are enabled\nin the config.\n\nIt can be used to drastically reduce lag on non-minigame servers.",
 					"LagAssist TogglePhysics"));
 			p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-					"     §c✸ §fLagAssist ChunkAnalyse §c- §eFind the laggiest chunks",
+					"     §2✸ §fLagAssist ChunkAnalyse §2- §eFind the laggiest chunks",
 					"§fOutput the first X laggiest chunks, based on a score table.\n\nIt can be fully configured, from how many chunks to show to\nhow much score each entity or tile-entity has.",
 					"LagAssist ChunkAnalyse"));
 			p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-					"     §c✸ §fLagAssist GetMap §c- §eGet a graph of server TPS",
-					"§fGives you a map that can help find lagspikes.\n§c(!) It exaggerates lag so it is more visible.\n§c(!) do not get alarmed.\n\n§fYou can use it along a cronometer\n§fto find how often the lagspikes happen. Then, you can\nuse your timings report to find a plugin that runs\nTasks at that interval.",
+					"     §2✸ §fLagAssist GetMap §2- §eGet a graph of server TPS",
+					"§fGives you a map that can help find lagspikes.\n§2(!) It exaggerates lag so it is more visible.\n§2(!) do not get alarmed.\n\n§fYou can use it along a cronometer\n§fto find how often the lagspikes happen. Then, you can\nuse your timings report to find a plugin that runs\nTasks at that interval.",
 					"LagAssist GetMap"));
 			p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-					"     §c✸ §fLagAssist Benchmark §c- §eGenerates a performance report",
+					"     §2✸ §fLagAssist Benchmark §2- §eGenerates a performance report",
 					"§fIt can be used to approximate how many players your server\ncan run without lagging, based on collected information.\nIt can also be used to find if hosts are overselling, and how much.",
 					"LagAssist Benchmark"));
 			p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-					"     §c✸ §fLagAssist StatsBar §c- §eGet a simple action-bar TPS Meter",
+					"     §2✸ §fLagAssist StatsBar §2- §eGet a simple action-bar TPS Meter",
 					"§fShows a simple action-bar showing data that\nis related to lag.\n\nIf you have rare lagspikes, this can help\npinpoint when they happen without having\nto stop doing something else.",
 					"LagAssist StatsBar"));
 			p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-					"     §c✸ §fLagAssist TpChunk §c- §eTeleport to a chunk",
-					"§f/LagAssist TpChunk [World] [X] [Z].\n\n§c(!) The X and Z variables are not F3 coords.\n\n",
+					"     §2✸ §fLagAssist TpChunk §2- §eTeleport to a chunk",
+					"§f/LagAssist TpChunk [World] [X] [Z].\n\n§2(!) The X and Z variables are not F3 coords.\n\n",
 					"LagAssist TpChunk"));
 			p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-					"     §c✸ §fLagAssist PreGenCH §c- §ePre-Generate chunks",
-					"§f/LagAssist PreGenCH [Radius] [Delay] [Amount]\n\n§c(!) This doesn't have any failsafes.\n§c(!) If you don't know how to use it, ask me first.",
+					"     §2✸ §fLagAssist PreGenCH §2- §ePre-Generate chunks",
+					"§f/LagAssist PreGenCH [Radius] [Delay] [Amount]\n\n§2(!) This doesn't have any failsafes.\n§2(!) If you don't know how to use it, ask me first.",
 					"LagAssist PreGenCH"));
 			p.spigot()
 					.sendMessage(Chat.genHoverAndSuggestTextComponent(
-							"     §c✸ §fLagAssist ChunkHopper §c- §eGet Chunk Hoppers",
+							"     §2✸ §fLagAssist ChunkHopper §2- §eGet Chunk Hoppers",
 							"§f/LagAssist chunkhopper [Player] [Amount]\n\n§fTGive a player a chunk hopper.",
 							"LagAssist ChunkHopper"));
 			p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-					"     §c✸ §fLagAssist Changelog §c- §eCheck Version info.",
+					"     §2✸ §fLagAssist Changelog §2- §eCheck Version info.",
 					"§fThis tool will show you the changelog in an update.\nIt is really useful if you haven't checked the changelog in the updates page already.",
 					"LagAssist Changelog"));
 			p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-					"     §c✸ §fLagAssist Version §c- §eShows you the plugin version.",
+					"     §2✸ §fLagAssist Version §2- §eShows you the plugin version.",
 					"§fThis should be used when reporting bugs.\nYou should allways update first when having a bug,\nas I fix bugs quite fast once i find them.",
 					"LagAssist Version"));
 
 			p.spigot().sendMessage(
-					Chat.genHoverAndSuggestTextComponent("     §c✸ §fLagAssist Reload §c- §eReloads the config",
+					Chat.genHoverAndSuggestTextComponent("     §2✸ §fLagAssist Reload §2- §eReloads the config",
 							"§fUse it when you changed the config", "LagAssist Reload"));
 		} else {
 			s.sendMessage("     ✸ LagAssist MobCuller - Clear the configured mobs");
@@ -221,60 +221,60 @@ public class CommandListener implements CommandExecutor {
 
 	private static void helpnew(CommandSender p) {
 		p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-				"     §c✸ §fLagAssist MobCuller §c- §eClear the configured mobs",
-				"§fClears the mobs that you have set to remove\nin the configuration file.\n\n§c(!) It won't remove named mobs.",
+				"     §2✸ §fLagAssist MobCuller §2- §eClear the configured mobs",
+				"§fClears the mobs that you have set to remove\nin the configuration file.\n\n§2(!) It won't remove named mobs.",
 				"LagAssist MobCuller"));
 		p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-				"     §c✸ §fLagAssist RedstoneCuller §c- §eDisables Redstone",
+				"     §2✸ §fLagAssist RedstoneCuller §2- §eDisables Redstone",
 				"§fDisables all the redstone that has been triggered in 30 ticks.\n\nIt can be used to temporarily disable lag-machines\nor to even break them, if you configure it to do so.\nIt also breaks lag-machines that don't use redstone wire!",
 				"LagAssist RedstoneCuller"));
 		p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-				"     §c✸ §fLagAssist ToggleSpawning §c- §eToggles mob spawning",
+				"     §2✸ §fLagAssist ToggleSpawning §2- §eToggles mob spawning",
 				"§fDisables all mob-spawning once it is toggled on.\n\nIt can be used when many players are online,\nand your server is not keeping up to all the mobs.",
 				"LagAssist ToggleSpawning"));
 		p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-				"     §c✸ §fLagAssist TogglePhyisics §c- §eToggles physics events.",
+				"     §2✸ §fLagAssist TogglePhyisics §2- §eToggles physics events.",
 				"§fIt disables all physics events that are enabled\nin the config.\n\nIt can be used to drastically reduce lag on non-minigame servers.",
 				"LagAssist TogglePhysics"));
 		p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-				"     §c✸ §fLagAssist ChunkAnalyse §c- §eFind the laggiest chunks",
+				"     §2✸ §fLagAssist ChunkAnalyse §2- §eFind the laggiest chunks",
 				"§fOutput the first X laggiest chunks, based on a score table.\n\nIt can be fully configured, from how many chunks to show to\nhow much score each entity or tile-entity has.",
 				"LagAssist ChunkAnalyse"));
 		p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-				"     §c✸ §fLagAssist GetMap §c- §eGet a graph of server TPS",
-				"§fGives you a map that can help find lagspikes.\n§c(!) It exaggerates lag so it is more visible.\n§c(!) do not get alarmed.\n\n§fYou can use it along a cronometer\n§fto find how often the lagspikes happen. Then, you can\nuse your timings report to find a plugin that runs\nTasks at that interval.",
+				"     §2✸ §fLagAssist GetMap §2- §eGet a graph of server TPS",
+				"§fGives you a map that can help find lagspikes.\n§2(!) It exaggerates lag so it is more visible.\n§2(!) do not get alarmed.\n\n§fYou can use it along a cronometer\n§fto find how often the lagspikes happen. Then, you can\nuse your timings report to find a plugin that runs\nTasks at that interval.",
 				"LagAssist GetMap"));
 		p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-				"     §c✸ §fLagAssist Benchmark §c- §eGenerates a performance report",
+				"     §2✸ §fLagAssist Benchmark §2- §eGenerates a performance report",
 				"§fIt can be used to approximate how many players your server\ncan run without lagging, based on collected information.\nIt can also be used to find if hosts are overselling, and how much.",
 				"LagAssist Benchmark"));
 		p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-				"     §c✸ §fLagAssist Ping §c- §eShows a ping benchmark",
+				"     §2✸ §fLagAssist Ping §2- §eShows a ping benchmark",
 				"§fIt can be used to find the best location to host your server\nbased on what the player ping is.\nThe recommended ping value is under 90ms.",
 				"LagAssist Ping"));
 		p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-				"     §c✸ §fLagAssist StatsBar §c- §eGet a simple action-bar TPS Meter",
+				"     §2✸ §fLagAssist StatsBar §2- §eGet a simple action-bar TPS Meter",
 				"§fShows a simple action-bar showing data that\nis related to lag.\n\nIf you have rare lagspikes, this can help\npinpoint when they happen without having\nto stop doing something else.",
 				"LagAssist StatsBar"));
 		p.spigot()
 				.sendMessage(Chat.genHoverAndSuggestTextComponent(
-						"     §c✸ §fLagAssist TpChunk §c- §eTeleport to a chunk",
-						"§f/LagAssist TpChunk [World] [X] [Z].\n\n§c(!) The X and Z variables are not F3 coords.\n\n",
+						"     §2✸ §fLagAssist TpChunk §2- §eTeleport to a chunk",
+						"§f/LagAssist TpChunk [World] [X] [Z].\n\n§2(!) The X and Z variables are not F3 coords.\n\n",
 						"LagAssist TpChunk"));
 		p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-				"     §c✸ §fLagAssist PreGenCH §c- §ePre-Generate chunks",
-				"§f/LagAssist PreGenCH [Radius] [Delay] [Amount]\n\n§c(!) This doesn't have any failsafes.\n§c(!) If you don't know how to use it, ask me first.",
+				"     §2✸ §fLagAssist PreGenCH §2- §ePre-Generate chunks",
+				"§f/LagAssist PreGenCH [Radius] [Delay] [Amount]\n\n§2(!) This doesn't have any failsafes.\n§2(!) If you don't know how to use it, ask me first.",
 				"LagAssist PreGenCH"));
 		p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-				"     §c✸ §fLagAssist Changelog §c- §eCheck Version info.",
+				"     §2✸ §fLagAssist Changelog §2- §eCheck Version info.",
 				"§fThis tool will show you the changelog in an update.\nIt is really useful if you haven't checked the changelog in the updates page already.",
 				"LagAssist Changelog"));
 		p.spigot().sendMessage(Chat.genHoverAndSuggestTextComponent(
-				"     §c✸ §fLagAssist Version §c- §eShows you the plugin version.",
+				"     §2✸ §fLagAssist Version §2- §eShows you the plugin version.",
 				"§fThis should be used when reporting bugs.\nYou should allways update first when having a bug,\nas I fix bugs quite fast once i find them.",
 				"LagAssist Version"));
 		p.spigot().sendMessage(
-				Chat.genHoverAndSuggestTextComponent("     §c✸ §fLagAssist Reload §c- §eReloads the config",
+				Chat.genHoverAndSuggestTextComponent("     §2✸ §fLagAssist Reload §2- §eReloads the config",
 						"§fUse it when you changed the config", "LagAssist Reload"));
 
 	}
@@ -283,7 +283,7 @@ public class CommandListener implements CommandExecutor {
 
 		boolean oldvers = Bukkit.getVersion().contains("1.8");
 
-		p.sendMessage("§c§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛§f§l LAG ASSIST §c§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
+		p.sendMessage("§2§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛§f§l LAG ASSIST §2§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
 		p.sendMessage("");
 		if (oldvers) {
 			help18(p);
@@ -291,7 +291,7 @@ public class CommandListener implements CommandExecutor {
 			helpnew(p);
 		}
 		p.sendMessage("");
-		p.sendMessage("§c§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
+		p.sendMessage("§2§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
 	}
 
 }

@@ -130,7 +130,7 @@ public class Data {
 
 		if (isSellHopper(loc)) {
 			data.set(cloc + ".sellhopper", false);
-			p.sendMessage(Main.PREFIX + "This sellhopper has been §cdisabled§f at " + percentage + "§f.");
+			p.sendMessage(Main.PREFIX + "This sellhopper has been §2disabled§f at " + percentage + "§f.");
 			saveData();
 			return true;
 		} else {

@@ -54,7 +54,7 @@ public class ChkAnalyse {
 				}
 				Collections.sort(scores);
 				p.sendMessage("");
-				p.sendMessage("§c§l⬛⬛⬛⬛⬛⬛ §f§lCHUNKANALYSER §c§l⬛⬛⬛⬛⬛⬛");
+				p.sendMessage("§2§l⬛⬛⬛⬛⬛⬛ §f§lCHUNKANALYSER §2§l⬛⬛⬛⬛⬛⬛");
 				p.sendMessage("");
 
 				for (int i = 0; i < ammoshow; i++) {
@@ -63,7 +63,7 @@ public class ChkAnalyse {
 				}
 
 				p.sendMessage("");
-				p.sendMessage("§c§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
+				p.sendMessage("§2§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
 			}
 		});
 
@@ -129,16 +129,16 @@ public class ChkAnalyse {
 		String cmd = "lagassist tpchunk " + p.getWorld().getName() + " " + String.valueOf(coords[0]) + " "
 				+ String.valueOf(coords[1]);
 
-		p.sendMessage("§c§l⬛⬛⬛⬛⬛⬛ §f§lCHUNK STATS §c§l⬛⬛⬛⬛⬛⬛");
+		p.sendMessage("§2§l⬛⬛⬛⬛⬛⬛ §f§lCHUNK STATS §2§l⬛⬛⬛⬛⬛⬛");
 		p.sendMessage("");
-		p.sendMessage("  §c✸ §fChunk coordonates: §e" + crds);
+		p.sendMessage("  §2✸ §fChunk coordonates: §7" + crds);
 		p.sendMessage("");
-		p.sendMessage("  §c✸ §fEntity Amount: §e" + stats.getEnts().length);
-		p.sendMessage("  §c✸ §fTiles Amount: §e" + stats.getTiles().length);
+		p.sendMessage("  §2✸ §fEntity Amount: §7" + stats.getEnts().length);
+		p.sendMessage("  §2✸ §fTiles Amount: §7" + stats.getTiles().length);
 		p.sendMessage("");
-		p.spigot().sendMessage(stats.genMobCount("  §c✸ §fDetailed Info §e(HOVER)", cmd));
+		p.spigot().sendMessage(stats.genMobCount("  §2✸ §fDetailed Info §7(HOVER)", cmd));
 		p.sendMessage("");
-		p.sendMessage("§c§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
+		p.sendMessage("§2§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
 
 	}
 

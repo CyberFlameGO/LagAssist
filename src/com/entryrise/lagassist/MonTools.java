@@ -41,7 +41,7 @@ public class MonTools implements Listener {
 		}
 
 		Bukkit.getLogger().info("    §e[§a✔§e] §fMapVisualizer.");
-		mapitemmeta.setDisplayName("§c§lLag§f§lAssist §e§lMonitor");
+		mapitemmeta.setDisplayName("§2§lLag§f§lAssist §e§lMonitor");
 		mapitem.setItemMeta(mapitemmeta);
 
 		int mapid = VersionMgr.getMapId(mapitem);
@@ -91,7 +91,7 @@ public class MonTools implements Listener {
 					} else if (tpsraw > 15) {
 						tps = "§e" + format.format(tpsraw);
 					} else {
-						tps = "§c" + format.format(tpsraw);
+						tps = "§2" + format.format(tpsraw);
 					}
 					String s = ChatColor.translateAlternateColorCodes('&',
 							stbmsg.replaceAll("\\{TPS\\}", tps)

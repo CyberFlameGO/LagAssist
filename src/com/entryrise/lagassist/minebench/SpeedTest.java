@@ -128,14 +128,14 @@ public class SpeedTest {
 		}
 
 		s.sendMessage("");
-		s.sendMessage("§c§l⬛⬛⬛⬛⬛⬛§f§l PINGTEST RESULTS §c§l⬛⬛⬛⬛⬛⬛");
+		s.sendMessage("§2§l⬛⬛⬛⬛⬛⬛§f§l PINGTEST RESULTS §2§l⬛⬛⬛⬛⬛⬛");
 		s.sendMessage("");
-		s.sendMessage(" §c✸ §fLowest Ping: §e" + String.valueOf(min) + "ms  §c(" + namemin + ")");
-		s.sendMessage(" §c✸ §fHighest Ping: §e" + String.valueOf(max) + "ms  §c(" + namemax + ")");
+		s.sendMessage(" §2✸ §fLowest Ping: §e" + String.valueOf(min) + "ms  §2(" + namemin + ")");
+		s.sendMessage(" §2✸ §fHighest Ping: §e" + String.valueOf(max) + "ms  §2(" + namemax + ")");
 		s.sendMessage("");
-		s.sendMessage(" §c✸ §fAverage Ping: §e" + df.format((double) (med / nr)) + "ms");
+		s.sendMessage(" §2✸ §fAverage Ping: §e" + df.format((double) (med / nr)) + "ms");
 		s.sendMessage("");
-		s.sendMessage("§c§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
+		s.sendMessage("§2§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
 
 	}
 }

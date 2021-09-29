@@ -40,7 +40,7 @@ public class Main extends JavaPlugin implements Listener {
 
 	public static String USER = "%%__USER__%%";
 
-	public static final String PREFIX = "§c§lLag§f§lAssist §e» §f";
+	public static final String PREFIX = "§2§lLag§f§lAssist §e» §f";
 
 	public static JavaPlugin p;
 	public static boolean paper = false;

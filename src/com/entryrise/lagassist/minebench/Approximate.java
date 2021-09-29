@@ -109,20 +109,20 @@ public class Approximate {
 					public void run() {
 						for (CommandSender cs : receivers) {
 							cs.sendMessage("");
-							cs.sendMessage("§c§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛§f§l BENCHMARK RESULTS §c§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
+							cs.sendMessage("§2§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛§f§l BENCHMARK RESULTS §2§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
 							cs.sendMessage("");
-							cs.sendMessage("  §c✸ §fCPU Name: §e" + cpuname);
+							cs.sendMessage("  §2✸ §fCPU Name: §e" + cpuname);
 							cs.sendMessage("");
-							cs.sendMessage("  §c✸ §fCPU Score (SINGLE): §e" + br.getStringifiedSth());
-							cs.sendMessage("  §c✸ §fCPU Score (MULTI): §e" + br.getStringifiedMth());
+							cs.sendMessage("  §2✸ §fCPU Score (SINGLE): §e" + br.getStringifiedSth());
+							cs.sendMessage("  §2✸ §fCPU Score (MULTI): §e" + br.getStringifiedMth());
 							cs.sendMessage("");
-							cs.sendMessage("  §c✸ §fDownload Speed: §e" + MIBDL + " Mib/s  (" + MBDL + "MB/s)");
-							cs.sendMessage("  §c✸ §fUpload Speed: §e" + MIBUP + " Mib/s  (" + MBUP + " MB/s)");
+							cs.sendMessage("  §2✸ §fDownload Speed: §e" + MIBDL + " Mib/s  (" + MBDL + "MB/s)");
+							cs.sendMessage("  §2✸ §fUpload Speed: §e" + MIBUP + " Mib/s  (" + MBUP + " MB/s)");
 							cs.sendMessage("");
-							cs.sendMessage("  §c✸ §fMax Players (SINGLE): §e" + singleapprox);
-							cs.sendMessage("  §c✸ §fMax Players (GLOBAL): §e" + multiapprox);
+							cs.sendMessage("  §2✸ §fMax Players (SINGLE): §e" + singleapprox);
+							cs.sendMessage("  §2✸ §fMax Players (GLOBAL): §e" + multiapprox);
 							cs.sendMessage("");
-							cs.sendMessage("§c§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
+							cs.sendMessage("§2§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
 						}
 						receivers.clear();
 						inuse = false;

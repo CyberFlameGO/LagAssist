@@ -101,11 +101,11 @@ public class ChkStats implements Comparable<ChkStats> {
 
 		String regionfile = "r." + String.valueOf(coords[0] >> 5) + "." + String.valueOf(coords[1] >> 5) + ".mca";
 
-		String empt = "\n§c✸ §fClick to teleport!\n\n§fChunk Information:\n  §c✸ §fWorld:§e "
-				+ Chat.capitalize(world.toLowerCase()) + "\n  §c✸ §fRegion File:§e " + regionfile
+		String empt = "\n§2✸ §fClick to teleport!\n\n§fChunk Information:\n  §2✸ §fWorld:§e "
+				+ Chat.capitalize(world.toLowerCase()) + "\n  §2✸ §fRegion File:§e " + regionfile
 				+ "\n\n§fMost often appearances:";
 		for (String stg : tops.keySet()) {
-			empt = empt + "\n" + "  §c✸ §f" + Chat.capitalize(stg.replace('_', ' ')) + ": §e"
+			empt = empt + "\n" + "  §2✸ §f" + Chat.capitalize(stg.replace('_', ' ')) + ": §e"
 					+ String.valueOf(tops.get(stg));
 		}
 		empt = empt + "\n";
@@ -114,7 +114,7 @@ public class ChkStats implements Comparable<ChkStats> {
 	}
 
 	public TextComponent genText() {
-		String name = "  §c✸ §fChunk §c(" + String.valueOf(coords[0]) + " " + String.valueOf(coords[1])
+		String name = "  §2✸ §fChunk §2(" + String.valueOf(coords[0]) + " " + String.valueOf(coords[1])
 				+ ")§f Score: §e" + String.valueOf(score);
 		String cmd = "lagassist tpchunk " + world + " " + String.valueOf(coords[0]) + " " + String.valueOf(coords[1]);
 		return genMobCount(name, cmd);

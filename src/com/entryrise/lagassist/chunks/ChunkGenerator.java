@@ -42,7 +42,7 @@ public class ChunkGenerator {
 		}
 
 		if (args.length != 2) {
-			s.sendMessage(Main.PREFIX + "Correct usage: §c/lagassist pregench [Max-Millis-Per-Tick]");
+			s.sendMessage(Main.PREFIX + "Correct usage: §2/lagassist pregench [Max-Millis-Per-Tick]");
 			return;
 		}
 
@@ -153,7 +153,7 @@ public class ChunkGenerator {
 					if (i % 300 == 0 && i != 0) {
 						int percent = (int) ((double) i / chunks.size() * 100);
 						Bukkit.getLogger()
-								.info("§e[§a✪§e] §fThe pregeneration of the §c"
+								.info("§e[§a✪§e] §fThe pregeneration of the §2"
 										+ Chat.capitalize(world.getName()) + " §fworld is at §a" + percent
 										+ "% completion.");
 					}
@@ -168,7 +168,7 @@ public class ChunkGenerator {
 				gentask.cancel();
 				gentask = null;
 				Bukkit.getLogger()
-						.info("§e[§a✪§e] §fThe pregeneration of the §c" + Chat.capitalize(world.getName())
+						.info("§e[§a✪§e] §fThe pregeneration of the §2" + Chat.capitalize(world.getName())
 								+ " §fworld is finished. Thank you for your patience.");
 
 			}

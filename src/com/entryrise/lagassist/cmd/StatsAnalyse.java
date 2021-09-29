@@ -53,11 +53,11 @@ public class StatsAnalyse implements Listener {
 			crstg = "NOT AVAILABLE";
 		}
 
-		String stats = "\n\n  §c✸    §fExact TPS: §c" + df.format(Monitor.exactTPS) + "\n\n  §c✸    §fEntities: §c"
-				+ String.valueOf(ent) + "\n  §c✸    §fLoaded Chunks: §c" + String.valueOf(chk)
-				+ "\n\n  §c✸    §fFree Memory: §c" + String.valueOf(Monitor.freeMEM()) + "MB"
-				+ "\n  §c✸    §fCPU Cores: §c" + crstg + "\n  §c✸    §fLoad Average: §c" + loadstg
-				+ "\n  §c✸    §fDisk Space: §c" + String.valueOf((Main.p.getDataFolder().getUsableSpace() / 1073741824))
+		String stats = "\n\n  §2✸    §fExact TPS: §2" + df.format(Monitor.exactTPS) + "\n\n  §2✸    §fEntities: §2"
+				+ String.valueOf(ent) + "\n  §2✸    §fLoaded Chunks: §2" + String.valueOf(chk)
+				+ "\n\n  §2✸    §fFree Memory: §2" + String.valueOf(Monitor.freeMEM()) + "MB"
+				+ "\n  §2✸    §fCPU Cores: §2" + crstg + "\n  §2✸    §fLoad Average: §2" + loadstg
+				+ "\n  §2✸    §fDisk Space: §2" + String.valueOf((Main.p.getDataFolder().getUsableSpace() / 1073741824))
 				+ "GB\n";
 
 		msg.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(stats).create()));

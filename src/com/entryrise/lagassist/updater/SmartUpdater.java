@@ -38,18 +38,18 @@ public class SmartUpdater {
 				ui = getNextUpdate();
 
 				if (ui == null) {
-					Bukkit.getLogger().info("§c§lLag§f§lAssist §e» §fYou are up to date with LagAssist.");
+					Bukkit.getLogger().info("§2§lLag§f§lAssist §e» §fYou are up to date with LagAssist.");
 					return;
 				}
 
-				Bukkit.getLogger().info("§c§lLag§f§lAssist §e» §fWe found a newer LagAssist version:");
+				Bukkit.getLogger().info("§2§lLag§f§lAssist §e» §fWe found a newer LagAssist version:");
 				if (ui.isUnsafe()) {
-					Bukkit.getLogger().warning("§c§lLag§f§lAssist §e» §fThis version is considered Unsafe!");
+					Bukkit.getLogger().warning("§2§lLag§f§lAssist §e» §fThis version is considered Unsafe!");
 				}
-				Bukkit.getLogger().info("    §c[§e֍§c] §fVersion: " + ui.getVersion());
-				Bukkit.getLogger().info("    §c[§e֍§c] §fReviews: " + ((int) (ui.getRating() * 100)) / 100f + "§e★");
-				Bukkit.getLogger().info("    §c[§e֍§c] §fDownloads: " + ui.getDownloads());
-				Bukkit.getLogger().info("    §c[§e֍§c] §fFor more info, use §c/lagassist changelog");
+				Bukkit.getLogger().info("    §2[§e֍§2] §fVersion: " + ui.getVersion());
+				Bukkit.getLogger().info("    §2[§e֍§2] §fReviews: " + ((int) (ui.getRating() * 100)) / 100f + "§e★");
+				Bukkit.getLogger().info("    §2[§e֍§2] §fDownloads: " + ui.getDownloads());
+				Bukkit.getLogger().info("    §2[§e֍§2] §fFor more info, use §2/lagassist changelog");
 
 			}
 		});
@@ -164,27 +164,27 @@ public class SmartUpdater {
 
 	public static void showChangelog(CommandSender s) {
 		if (ui == null) {
-			s.sendMessage("§c§lLag§f§lAssist §e» §fThere is no new recommended version available.");
+			s.sendMessage("§2§lLag§f§lAssist §e» §fThere is no new recommended version available.");
 			return;
 		}
 
 		String formatdesc = getFormattedDesc();
 
-		s.sendMessage("§c§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛§f§l LAGASSIST CHANGELOG §c§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
+		s.sendMessage("§2§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛§f§l LAGASSIST CHANGELOG §2§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
 		s.sendMessage("");
-		s.sendMessage("  §c✸ §fNew Version: §e" + ui.getVersion());
+		s.sendMessage("  §2✸ §fNew Version: §e" + ui.getVersion());
 		s.sendMessage("");
-		s.sendMessage("  §c✸ §fTitle:");
+		s.sendMessage("  §2✸ §fTitle:");
 		s.sendMessage(" §e" + ui.getTitle());
 		s.sendMessage("");
-		s.sendMessage("  §c✸ §fDescription:");
+		s.sendMessage("  §2✸ §fDescription:");
 		s.sendMessage(" §e" + formatdesc);
 		s.sendMessage("");
-		s.sendMessage("  §c✸ §fRating: §e" + ui.getRating() + "★");
-		s.sendMessage("  §c✸ §fDownloads: §e" + ui.getDownloads());
-		s.sendMessage("  §c✸ §fLikes: §e" + ui.getLikes());
+		s.sendMessage("  §2✸ §fRating: §e" + ui.getRating() + "★");
+		s.sendMessage("  §2✸ §fDownloads: §e" + ui.getDownloads());
+		s.sendMessage("  §2✸ §fLikes: §e" + ui.getLikes());
 		s.sendMessage("");
-		s.sendMessage("§c§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
+		s.sendMessage("§2§l⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛⬛");
 	}
 
 }
