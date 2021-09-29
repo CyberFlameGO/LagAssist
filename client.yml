@@ -5,21 +5,21 @@
 # | |___| (_| | (_| |/ ____ \\__ \__ \ \__ \ |_ 
 # |______\__,_|\__, /_/    \_\___/___/_|___/\__|
 #               __/ |                           
-#              |___/     By Stefatorus       
+#              |___/     By EntryRise       
 # 
-# This is the default configuration. I suggest using it as it is.
-# If you need help configuring it, please add me on discord.
-# DISCORD: Stefatorus#9382
+# This is the default configuration. We suggest using it as it is.
+# If you need help configuring it, please visit our dedicated Discord Server.
+# DISCORD: https://discord.gg/4aWWPcb
 #
 # The Client-Side tweaks offer a nice way to improve your player's experience.
 # It offers ways to hide some laggy features in minecraft and thus simplify the game
 # for the players, while the server still works as normally.
 #
 # NOTE: THE CLIENT-SIDE TWEAKS SHOULD WORK ON 1.8-1.13.1, BUT SOME FUTURE VERSIONS
-#       MAY NOT WORK OUT OF THE BOX. PLEASE CONTACT ME TO UPDATE THIS SYSTEM IF
+#       MAY NOT WORK OUT OF THE BOX. PLEASE CONTACT US TO UPDATE THIS SYSTEM IF
 #       ANY PROBLEM ARISES.
 settings:
-  # The client-side tweaks are currently experimental. They have been tested decently,
+  # The client-side tweaks are currently experimental. They have been tested comprehensively,
   # but not against a large range of systems and minecraft versions. Please take care.
   enabled: false
   # Set the command that players will use to open the client-side optimizer.
@@ -31,7 +31,7 @@ settings:
   # The prefix of client-side optimizer messages.
   prefix: "&c&lOptimize &e» &f"
 
-# The default cliet-side tweaks that will be enabled
+# The cliet-side tweaks that will be enabled by default
 defaults:
   tnt: true
   sand: true
