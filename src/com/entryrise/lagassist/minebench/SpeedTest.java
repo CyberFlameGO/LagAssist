@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.SplittableRandom;
 import java.util.UUID;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -55,14 +57,17 @@ public class SpeedTest {
 	}
 
 	protected static float getUpSpeed() {
-		URLConnection ftp;
+		HttpsURLConnection ftp;
 		try {
-			long dlsize = Main.config.getLong("benchmark.upload.size");
+			long upsize = Main.config.getLong("benchmark.upload.size");
 
 			URL ftpupur = new URL(
 					Main.config.getString("benchmark.upload.link").replaceAll("%RND%", UUID.randomUUID().toString()));
 
-			ftp = ftpupur.openConnection();
+			ftp = (HttpsURLConnection) ftpupur.openConnection();
+			
+			ftp.setDoOutput(true);
+			ftp.setRequestProperty("Content-Length", "" + upsize);
 			ftp.connect();
 
 			OutputStream of = ftp.getOutputStream();
@@ -71,23 +76,24 @@ public class SpeedTest {
 			
 			long begin = System.currentTimeMillis();
 			
-			for (int i = 0; i < dlsize; i+=4) {
-				int a = sr.nextInt(0, Integer.MAX_VALUE);
-				of.write((a >> 0) & 0xff);
-				of.write((a >> 8) & 0xff);
-				of.write((a >> 16) & 0xff);
-				of.write((a >> 24) & 0xff);
+			// Fast write. Makes bufferedoutputstream redundant (this is optimized without it), but it doesn't hurt.
+			
+			for (int i = 0; i < upsize; i++) {
+				bof.write((byte) i);
 			}
 			
 			bof.flush();
+			of.flush();
 			
 			float taken = (System.currentTimeMillis() - begin) / 1000.0f;
 
 			bof.close();
 			of.close();
 			
-			return dlsize / 1000000 / taken;
+			Main.sendDebug("Speedtest with uploadsize: " + upsize + " took " + taken + " seconds", 1);
+			return upsize / 1000000 / taken;
 		} catch (IOException e) {
+//			e.printStackTrace();
 			return -1;
 		}
 
