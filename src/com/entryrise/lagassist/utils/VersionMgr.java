@@ -62,8 +62,12 @@ public class VersionMgr {
 		return Bukkit.getVersion().contains("1.17");
 	}
 	
+	public static boolean isV1_18() {
+		return Bukkit.getVersion().contains("1.18");
+	}
+	
 	public static boolean isV_17Plus() {
-		return isV1_17();
+		return isV1_17() || isV1_18();
 	}
 	
 	public static boolean isNewMaterials() {

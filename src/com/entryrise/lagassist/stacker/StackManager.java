@@ -111,7 +111,8 @@ public class StackManager implements Listener {
 //		}
 		
 		if (StackChunk.tryStacking(ent.getLocation(), ent.getType(), ent)) {
-			e.setCancelled(true);
+//			e.setCancelled(true);
+			ent.remove();
 		}
 	}
 
